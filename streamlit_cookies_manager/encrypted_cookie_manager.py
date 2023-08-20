@@ -13,6 +13,10 @@ from streamlit_cookies_manager import CookieManager
 
 @st.cache_data
 def key_from_parameters(salt: bytes, iterations: int, password: str):
+    cache_key = f"key_from_parameters-{salt}-{iterations}-{password}"
+    cached_result = st.cache_data(cache_key)
+    if cached_result is not None:
+        return cached_result
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
@@ -20,7 +24,9 @@ def key_from_parameters(salt: bytes, iterations: int, password: str):
         iterations=iterations,
     )
 
-    return base64.urlsafe_b64encode(kdf.derive(password.encode('utf-8')))
+    result =  base64.urlsafe_b64encode(kdf.derive(password.encode('utf-8')))
+    st.cache_data(cache_key, result)
+    return result
 
 
 class EncryptedCookieManager(MutableMapping[str, str]):
