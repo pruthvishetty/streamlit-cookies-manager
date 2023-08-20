@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "streamlit-cookies-manager-custom"
+name = "streamlit-cookies-manager"
 version = "0.2.1"
 description = "Access and save cookies from Streamlit with cache issue fixed"
-authors = ["Tomasz Kontusz <tomasz.kontusz@gmail.com> and Pruthvi Shetty <mail@prutvishetty.com>"]
+authors = ["Pruthvi Shetty <mail@prutvishetty.com>"]
 license = "Apache-2.0"
 
 readme = "README.md"
